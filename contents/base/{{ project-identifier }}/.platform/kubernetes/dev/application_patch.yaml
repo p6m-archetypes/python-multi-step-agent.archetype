@@ -1,0 +1,9 @@
+apiVersion: meta.p6m.dev/v1alpha1
+kind: PlatformApplication
+metadata:
+  name: {{ project-identifier }}
+spec:
+  networking:
+    ingress:
+      hostnames:
+        - {{ project-identifier }}.eks.us-east-2.aws.dev.ybor-playground.p6m.run

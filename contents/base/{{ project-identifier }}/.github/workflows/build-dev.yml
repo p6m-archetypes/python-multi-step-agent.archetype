@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "docs/**"
+      - "README.md"
+
+name: 1. Dev Build & Deploy
+run-name: Dev Build & Deploy
+permissions: write-all
+
+jobs:
+  build_and_deploy:
+    uses: p6m-dev/github-actions/.github/workflows/build-deploy-python-container-ecr.yaml@main
+    secrets:
+      ARTIFACTORY_USERNAME: ${{'{'}}{ secrets.ARTIFACTORY_USERNAME }}
+      ARTIFACTORY_IDENTITY_TOKEN: ${{'{'}}{ secrets.ARTIFACTORY_IDENTITY_TOKEN }}
+      UPDATE_MANIFEST_TOKEN: ${{'{'}}{ secrets.UPDATE_MANIFEST_TOKEN }}
+      ARTIFACTORY_TOKEN: ${{'{'}}{ secrets.ARTIFACTORY_TOKEN }}
+    with:
+      ARTIFACTORY_REGISTRY: "p6m.jfrog.io"
+      APPS: {{ project-identifier }}
+      DOCKER_REPO: p6m-dev-docker/applications
+      PYTHON_VERSION: "3.11.10"

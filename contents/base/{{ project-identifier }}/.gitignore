@@ -1,0 +1,9 @@
+.idea/
+.venv/
+dist/
+__pycache__/
+.DS_Store
+{{ project_identifier }}/.env
+poetry.lock
+logs/
+.files/

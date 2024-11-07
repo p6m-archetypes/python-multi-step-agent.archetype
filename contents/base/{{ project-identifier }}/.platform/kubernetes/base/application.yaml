@@ -1,0 +1,30 @@
+apiVersion: meta.p6m.dev/v1alpha1
+kind: PlatformApplication
+metadata:
+  name: {{ project-identifier }}
+  labels:
+    p6m.dev/app: {{ project-identifier }}
+spec:
+  secrets:
+    - name: {{ project-identifier }}
+  deployment:
+    image: {{ project-identifier }}-server:latest
+    ports:
+      - protocol: http
+        port: 8000
+    readinessProbe:
+      port: 8000
+      path: /health/readiness
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: "2000m"
+      limits:
+        memory: 2Gi
+  networking:
+    ingress:
+      enabled: true
+      oidc: true
+      type: kubernetes
+      annotations:
+        alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=60

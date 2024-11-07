@@ -1,0 +1,9 @@
+.watermark {
+    display: none !important;
+}
+
+button.MuiButtonBase-root.MuiTab-root {
+    width: auto !important;
+    padding: 0 20px !important;    
+}
+

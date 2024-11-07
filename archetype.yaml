@@ -1,0 +1,13 @@
+---
+description: "Multi Step Agent"
+authors: ["Cenk Dolek"]
+languages: [Python]
+frameworks: [Chainlit]
+tags: [chainlit, rag]
+
+requires:
+  archetect: "2.0.0-ALPHA.10"
+
+components:
+  org-prompts: git@github.com:p6m-dev/org-prompts.archetype.git
+  gitignore: https://github.com/archetect/dot-gitignore.archetype.git

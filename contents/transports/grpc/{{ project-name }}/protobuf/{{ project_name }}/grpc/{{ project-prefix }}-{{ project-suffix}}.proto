@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+service {{ ProjectPrefix }}{{ ProjectSuffix }} {
+    rpc Create{{ ProjectPrefix }} ({{ ProjectPrefix }}Dto) returns (Create{{ ProjectPrefix }}Response);
+    rpc Get{{ ProjectPrefix | pluralize }} (Get{{ ProjectPrefix | pluralize }}Request) returns (Get{{ ProjectPrefix | pluralize }}Response);
+    rpc Get{{ ProjectPrefix }} (Get{{ ProjectPrefix }}Request) returns (Get{{ ProjectPrefix }}Response);
+    rpc Update{{ ProjectPrefix }} ({{ ProjectPrefix }}Dto) returns (Update{{ ProjectPrefix }}Response);
+}
+
+message {{ ProjectPrefix }}Dto {
+    google.protobuf.StringValue id = 1;
+    string name = 2;
+}
+
+message Get{{ ProjectPrefix }}Request {
+    string id = 1;
+}
+
+message Get{{ ProjectPrefix }}Response {
+        {{ ProjectPrefix }}Dto {{ projectPrefix }} = 1;
+}
+
+message Get{{ ProjectPrefix | pluralize }}Request {
+    int32 start_page = 1;
+    int32 page_size = 2;
+}
+
+message Get{{ ProjectPrefix | pluralize }}Response {
+    repeated {{ ProjectPrefix }}Dto {{ project_prefix }} = 1;
+    bool has_next = 2;
+    bool has_previous = 3;
+    int32 next_page = 4;
+    int32 previous_page = 5;
+    int32 total_pages = 6;
+    int64 total_elements = 7;
+}
+
+message Update{{ ProjectPrefix }}Response {
+    {{ ProjectPrefix }}Dto {{ projectPrefix }} = 1;
+}
+
+message Create{{ ProjectPrefix }}Response {
+    {{ ProjectPrefix }}Dto {{ projectPrefix }} = 1;
+}

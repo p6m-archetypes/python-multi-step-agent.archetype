@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "{{ project-identifier }}"
+version = "0.1.0"
+description = "{{ project-title }}"
+
+authors = [
+    "{{ author_full }}",
+    "Rajeev Bhatia <rajeev@ybor.ai>",
+    "Cenk Dolek <cenk@ybor.ai>",
+    "Archetect <archetect@github.io>",
+]
+
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.*"
+
+llama-index = "^0.11.21"
+llama-index-core = "^0.11.21"
+llama-parse = "^0.5.13"
+llama-index-tools-tavily-research = "^0.2.0"
+
+pydantic = "^2.9.2"
+joblib = "1.3.2"
+chainlit = "^1.3.1"
+
+openai = "^1.54.1"
+
+loguru = "^0.7.2"
+llama-index-callbacks-openinference = "^0.2.0"
+openinference-instrumentation-llama-index = "^3.0.3"
+arize-phoenix-otel = "^0.6.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+flake8 = "^6.1.0"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.poetry.scripts]
+main = "{{ project_identifier }}.main:main"
+docker-build = "manage.docker:docker_build"
+docker-run = "manage.docker:docker_run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

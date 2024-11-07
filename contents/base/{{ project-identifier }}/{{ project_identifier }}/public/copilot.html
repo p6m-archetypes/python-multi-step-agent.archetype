@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        background-image: url("bg.jpg");
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      const url = new URL(window.location.href);
+      const hostname = url.hostname;
+      const port = url.port ? `:${url.port}` : "";
+      const serverUrl = `${url.protocol}//${hostname}${port}`;
+      const script = document.createElement("script");
+      script.src = `${serverUrl}/copilot/index.js`;
+
+      document.head.appendChild(script);
+
+      script.onload = function () {
+        window.mountChainlitWidget({
+          chainlitServer: serverUrl,
+          accessToken: "<NEEDS_ACCESS_TOKEN>",
+        });
+        window.addEventListener("chainlit-call-fn", (e) => {
+          const { name, args, callback } = e.detail;
+          if (name === "test") {
+            callback("You sent: " + args.msg);
+          }
+          console.log("Received call to function:", name, args);
+        });
+
+        window.addEventListener("load", () => {
+          function hideWatermarkInShadowRoot() {
+            var widget = document.querySelector("#chainlit-copilot");
+            if (widget && widget.shadowRoot) {
+              var shadowRoot = widget.shadowRoot;
+              var watermarkDiv = shadowRoot.querySelector(
+                ".MuiStack-root.watermark"
+              );
+              if (watermarkDiv) {
+                watermarkDiv.style.display = "none";
+              }
+            }
+          }
+
+          /**
+            This function observes the shadow DOM of a widget with the ID "chainlit-copilot". 
+            If the widget or its shadow root is not found, it retries after 500 milliseconds.
+            Once the shadow root is found, it creates a MutationObserver to watch for changes 
+            in the shadow DOM and calls the `hideWatermarkInShadowRoot` function whenever a 
+            mutation is detected.
+        */
+          function observeShadowDOM() {
+            var widget = document.querySelector("#chainlit-copilot");
+            if (!widget || !widget.shadowRoot) {
+              console.log("Shadow root not found, retrying...");
+              setTimeout(observeShadowDOM, 500);
+              return;
+            }
+
+            const shadowRoot = widget.shadowRoot;
+
+            // Create a MutationObserver to watch for changes in the shadow DOM
+            const observer = new MutationObserver((mutations) => {
+              mutations.forEach((mutation) => {
+                hideWatermarkInShadowRoot();
+              });
+            });
+
+            // Start observing the shadow DOM for child node changes
+            observer.observe(shadowRoot, { childList: true, subtree: true });
+
+            // Call the function initially to hide the watermark if it's already there
+            hideWatermarkInShadowRoot();
+          }
+
+          observeShadowDOM();
+        });
+      };
+    </script>
+  </body>
+</html>

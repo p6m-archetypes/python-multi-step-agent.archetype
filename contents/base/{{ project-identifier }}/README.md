@@ -1,6 +1,6 @@
 # Multi Step Agent ({{ project-title }})
 
-This project comes with documents and a built index for you to test the functionality. `{{ project-identifier }}/data/documents` folder contains the pdf files we have vectorized earlier. If you would like to recreate the index with your own documents, please follow the steps in index creation section.
+This project comes with documents and a built index for you to test the functionality. `{{ project_identifier }}/data/documents` folder contains the pdf files we have vectorized earlier. If you would like to recreate the index with your own documents, please follow the steps in index creation section.
 
 You can access your project here:
 
@@ -92,17 +92,17 @@ For more information please refer to: [https://docs.chainlit.io/authentication/o
 
 ### Index Creation
 
-- Make sure that you have the pdf files in `{{ project-identifier }}/data/documents/`
+- Make sure that you have the pdf files in `{{ project_identifier }}/data/documents/`
 - Delete the following folders:
 
 ```shell
-rm -rf {{ project-identifier }}/data/images {{ project-identifier }}/data/indices
+rm -rf {{ project_identifier }}/data/images {{ project_identifier }}/data/indices
 ```
 
 - Run the following script, which will read the pdf files from the documents folder, and use LlamaParse to extract images/text and create a new index for you.
 
 ```shell
-poetry run python {{ project-identifier }}/scripts/index_data.py
+poetry run python {{ project_identifier }}/scripts/index_data.py
 ```
 
 - After completing these steps, you can restart your application.

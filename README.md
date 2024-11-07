@@ -1,4 +1,4 @@
-# A Python Project Scaffolding archetype
+# Multi Step Agent Archetype
 
 This is an [Archetect](https://archetect.github.io/) archetype.
 

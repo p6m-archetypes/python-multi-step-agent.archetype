@@ -1,6 +1,6 @@
 let context = #{};
 
-// Pass `-s debug-answers` to archetect to output the answers it sees from various sources
+// Pass `-s debug-answers` to archetect to output the answers it sees from various sources.
 if switch_enabled("debug-answers") {
     print("Answers:");
     print(as_yaml(ANSWERS));

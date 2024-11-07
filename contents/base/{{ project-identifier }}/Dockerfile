@@ -19,7 +19,7 @@ USER appuser
 WORKDIR /home/appuser/app
 
 COPY --chown=appuser:appgroup pyproject.toml poetry.lock ./
-COPY --chown=appuser:appgroup {{ project-identifier }} ./{{ project-identifier }}
+COPY --chown=appuser:appgroup {{ project_identifier }} ./{{ project_identifier }}
 
 RUN touch README.md
 RUN poetry install --without dev && rm -rf $POETRY_CACHE_DIR
@@ -37,7 +37,7 @@ WORKDIR /home/appuser/app
 
 # Copy only necessary files
 COPY --from=builder --chown=appuser:appgroup /home/appuser/app/.venv ./.venv
-COPY --from=builder --chown=appuser:appgroup /home/appuser/app/{{ project-identifier }} ./{{ project-identifier }}
+COPY --from=builder --chown=appuser:appgroup /home/appuser/app/{{ project_identifier }} ./{{ project_identifier }}
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -48,7 +48,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 EXPOSE 8000
 
-WORKDIR /home/appuser/app/{{ project-identifier }}
+WORKDIR /home/appuser/app/{{ project_identifier }}
 
 RUN chmod +x ./run.sh
 

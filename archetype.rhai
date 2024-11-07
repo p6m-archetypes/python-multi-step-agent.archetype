@@ -7,6 +7,8 @@ if switch_enabled("debug-answers") {
     print();
 }
 
+context += render(Archetype("org-prompts"), ANSWERS);
+
 if ANSWERS.menus != () {
     for menu in ANSWERS.menus {  // get an array of all the property names via 'keys'
         if menu["select_type"] == "single" {

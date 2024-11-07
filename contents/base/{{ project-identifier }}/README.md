@@ -4,7 +4,7 @@ This project comes with documents and a built index for you to test the function
 
 You can access your project here:
 
-[https://{{ project-identifier }}.eks.us-east-2.aws.dev.{{ org-name }}.p6m.run](https://{{ project-identifier }}.eks.us-east-2.aws.dev.{{ org-name }}.p6m.run)
+[https://{{ project-identifier }}.eks.us-east-2.aws.dev.{{ org-name }}-{{ solution-name }}.p6m.run](https://{{ project-identifier }}.eks.us-east-2.aws.dev.{{ org-name }}-{{ solution-name }}.p6m.run)
 
 ## Project Initialization
 
